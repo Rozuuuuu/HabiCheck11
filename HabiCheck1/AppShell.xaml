@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="HabiCheck.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:HabiCheck.Views"
+    Shell.NavBarIsVisible="False"
+    FlyoutBehavior="Disabled">
+
+    <!--
+        LoginPage is the root entry point.
+        After login, we push Dashboard onto the stack.
+        Dashboard uses its own bottom tab bar (TabBar below is used
+        only after login via Shell.Current.GoToAsync).
+    -->
+
+    <!-- Login as initial route (no tab bar) -->
+    <ShellContent
+        Route="LoginPage"
+        ContentTemplate="{DataTemplate views:LoginPage}"
+        Shell.NavBarIsVisible="False" />
+
+    <!-- Registered routes (navigated to programmatically) -->
+</Shell>

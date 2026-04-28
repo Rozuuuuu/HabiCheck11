@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="HabiCheck.Views.LoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:HabiCheck.ViewModels"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="{StaticResource Cream}">
+
+    <ContentPage.BindingContext>
+        <vm:LoginViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="0">
+
+            <!-- ── Decorative Header ──────────────────── -->
+            <Grid HeightRequest="180" BackgroundColor="{StaticResource Cream}">
+                <Ellipse
+                    Fill="{StaticResource DeepSage}"
+                    Opacity="0.08"
+                    WidthRequest="260" HeightRequest="260"
+                    HorizontalOptions="Start" VerticalOptions="Start"
+                    TranslationX="-80" TranslationY="-80"/>
+                <Ellipse
+                    Fill="{StaticResource SageGreen}"
+                    Opacity="0.08"
+                    WidthRequest="200" HeightRequest="200"
+                    HorizontalOptions="End" VerticalOptions="Start"
+                    TranslationX="60" TranslationY="-40"/>
+            </Grid>
+
+            <!-- ── Logo & Brand ───────────────────────── -->
+            <VerticalStackLayout
+                HorizontalOptions="Center"
+                Spacing="6"
+                Margin="0,-60,0,0">
+
+                <!-- Logo Box -->
+                <Border
+                    BackgroundColor="{StaticResource DeepSage}"
+                    WidthRequest="90" HeightRequest="90"
+                    StrokeShape="RoundRectangle 24"
+                    HorizontalOptions="Center"
+                    Shadow="{Shadow Brush={StaticResource DeepSage}, Offset='0,8', Opacity=0.35, Radius=16}">
+                    <!-- SVG logo drawn with Unicode + label trick -->
+                    <Label
+                        Text="🔍🌿"
+                        FontSize="36"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"/>
+                </Border>
+
+                <Label
+                    Text="Habi-Check"
+                    Style="{StaticResource H1}"
+                    HorizontalOptions="Center"/>
+                <Label
+                    Text="Eco-conscious fabric scanner"
+                    Style="{StaticResource Body}"
+                    HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+            <!-- ── Form Card ───────────────────────────── -->
+            <Frame Margin="20,24,20,0" Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="20">
+
+                    <VerticalStackLayout Spacing="2">
+                        <Label Text="Welcome back" Style="{StaticResource H2}"/>
+                        <Label Text="Sign in to your account" Style="{StaticResource Body}"/>
+                    </VerticalStackLayout>
+
+                    <!-- Email -->
+                    <VerticalStackLayout Spacing="6">
+                        <Label
+                            Text="Email"
+                            FontFamily="PoppinsSemiBold"
+                            FontSize="13"
+                            TextColor="{StaticResource DeepSage}"/>
+                        <Border
+                            BackgroundColor="{StaticResource InputBg}"
+                            StrokeShape="RoundRectangle 14"
+                            Stroke="Transparent"
+                            Padding="16,0">
+                            <Entry
+                                Style="{StaticResource InputEntry}"
+                                Placeholder="you@example.com"
+                                Keyboard="Email"
+                                Text="{Binding Email}"/>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <!-- Password -->
+                    <VerticalStackLayout Spacing="6">
+                        <Label
+                            Text="Password"
+                            FontFamily="PoppinsSemiBold"
+                            FontSize="13"
+                            TextColor="{StaticResource DeepSage}"/>
+                        <Border
+                            BackgroundColor="{StaticResource InputBg}"
+                            StrokeShape="RoundRectangle 14"
+                            Stroke="Transparent"
+                            Padding="16,0">
+                            <Entry
+                                Style="{StaticResource InputEntry}"
+                                Placeholder="••••••••"
+                                IsPassword="{Binding ShowPassword, Converter={StaticResource InvertBoolConverter}}"
+                                Text="{Binding Password}"/>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <!-- Error message -->
+                    <Label
+                        Text="{Binding ErrorMessage}"
+                        TextColor="{StaticResource WarningRed}"
+                        FontSize="12"
+                        IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotEmptyConverter}}"/>
+
+                    <!-- Login Button -->
+                    <Button
+                        Text="Login"
+                        Style="{StaticResource PrimaryButton}"
+                        Command="{Binding LoginCommand}"
+                        IsEnabled="{Binding IsNotBusy}"/>
+
+                    <!-- Divider -->
+                    <HorizontalStackLayout HorizontalOptions="Fill" Spacing="10">
+                        <BoxView HeightRequest="1" BackgroundColor="{StaticResource Muted}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                        <Label Text="or" TextColor="#B0A99A" FontSize="12" VerticalOptions="Center"/>
+                        <BoxView HeightRequest="1" BackgroundColor="{StaticResource Muted}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
+
+                    <!-- Guest Button -->
+                    <Button
+                        Text="Continue as Guest"
+                        Style="{StaticResource OutlineButton}"
+                        Command="{Binding ContinueAsGuestCommand}"/>
+
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Sign up link -->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="4" Margin="0,20,0,40">
+                <Label Text="Don't have an account?" Style="{StaticResource Body}"/>
+                <Label
+                    Text="Sign up"
+                    TextColor="{StaticResource Terracotta}"
+                    FontFamily="PoppinsSemiBold"
+                    FontSize="14"/>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

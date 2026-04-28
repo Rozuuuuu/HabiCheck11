@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="HabiCheck.Views.ResultPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:HabiCheck.ViewModels"
+    Shell.NavBarIsVisible="False">
+
+    <ContentPage.BindingContext>
+        <vm:ResultViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="{Binding GradientStart}" Offset="0"/>
+            <GradientStop Color="{Binding GradientEnd}"   Offset="1"/>
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+
+            <Grid ColumnDefinitions="Auto,*,Auto" Margin="0,44,0,0">
+                <Border
+                    Grid.Column="0"
+                    BackgroundColor="#33FFFFFF"
+                    WidthRequest="44" HeightRequest="44"
+                    StrokeShape="RoundRectangle 22">
+                    <Label Text="←" TextColor="White" FontSize="22"
+                           HorizontalOptions="Center" VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoHomeCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+
+                <Border
+                    Grid.Column="2"
+                    BackgroundColor="#33FFFFFF"
+                    WidthRequest="44" HeightRequest="44"
+                    StrokeShape="RoundRectangle 22">
+                    <Label Text="⟳" TextColor="White" FontSize="22"
+                           HorizontalOptions="Center" VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ScanAnotherCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+            </Grid>
+
+            <Border
+                BackgroundColor="White"
+                WidthRequest="130" HeightRequest="130"
+                StrokeShape="RoundRectangle 65"
+                HorizontalOptions="Center"
+                StrokeThickness="0">
+                <Border.Shadow>
+                    <Shadow Brush="Black" Offset="0,10" Opacity="0.25" Radius="20"/>
+                </Border.Shadow>
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="0">
+                    <Label
+                        Text="{Binding FabricData.Grade}"
+                        TextColor="{Binding GradeColor}"
+                        FontFamily="PoppinsBold"
+                        FontSize="42"
+                        HorizontalOptions="Center"/>
+                    <Label
+                        Text="GRADE"
+                        TextColor="#888888"
+                        FontFamily="PoppinsSemiBold"
+                        FontSize="11"
+                        HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <Border Grid.Column="0" Style="{StaticResource CardBorder}" Padding="16">
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="💨" FontSize="22"/>
+                        <Label Text="{Binding FabricData.Breathability, StringFormat='{0}%'}"
+                               FontFamily="PoppinsBold" FontSize="26"/>
+                        <Label Text="Breathability" FontSize="12" Opacity="0.7"/>
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Column="1" Style="{StaticResource CardBorder}" Padding="16">
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="🌿" FontSize="22"/>
+                        <Label Text="{Binding FabricData.Sustainability, StringFormat='{0}%'}"
+                               FontFamily="PoppinsBold" FontSize="26"/>
+                        <Label Text="Sustainability" FontSize="12" Opacity="0.7"/>
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <Border Style="{StaticResource CardBorder}" Padding="16">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                    <Label Grid.Column="0" Text="💧" FontSize="24" VerticalOptions="Start"/>
+                    <VerticalStackLayout Grid.Column="1" Spacing="4">
+                        <Label Text="Fabric Analysis"
+                               FontFamily="PoppinsSemiBold" FontSize="15"/>
+                        <Label Text="{Binding FabricData.PersonalMessage}"
+                               FontSize="13" LineHeight="1.5"/>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                <Border Grid.Column="0" Style="{StaticResource CardBorder}" Padding="12">
+                    <VerticalStackLayout HorizontalOptions="Center" Spacing="6">
+                        <Label Text="✨" FontSize="28" HorizontalOptions="Center"/>
+                        <Label Text="Wash Tips" FontFamily="PoppinsSemiBold"
+                               FontSize="11" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Column="1" Style="{StaticResource CardBorder}" Padding="12">
+                    <VerticalStackLayout HorizontalOptions="Center" Spacing="6">
+                        <Label Text="💰" FontSize="28" HorizontalOptions="Center"/>
+                        <Label Text="Resale" FontFamily="PoppinsSemiBold"
+                               FontSize="11" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Column="2" Style="{StaticResource CardBorder}" Padding="12">
+                    <VerticalStackLayout HorizontalOptions="Center" Spacing="6">
+                        <Label Text="♻️" FontSize="28" HorizontalOptions="Center"/>
+                        <Label Text="Upcycle" FontFamily="PoppinsSemiBold"
+                               FontSize="11" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <Button
+                Text="Scan Another Item"
+                BackgroundColor="White"
+                TextColor="#222222"
+                FontFamily="PoppinsBold"
+                FontSize="16"
+                CornerRadius="28"
+                HeightRequest="56"
+                Margin="0,8,0,40"
+                Command="{Binding ScanAnotherCommand}">
+                <Button.Shadow>
+                    <Shadow Brush="Black" Offset="0,6" Opacity="0.2" Radius="14"/>
+                </Button.Shadow>
+            </Button>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

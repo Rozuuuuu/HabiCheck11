@@ -1,0 +1,553 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="HabiCheck.Views.DashboardPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:HabiCheck.ViewModels"
+    xmlns:model="clr-namespace:HabiCheck.Models"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="{StaticResource Cream}">
+
+    <ContentPage.BindingContext>
+        <vm:DashboardViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <!-- ── Header (sage green) ──────────────────── -->
+        <Grid
+            Grid.Row="0"
+            BackgroundColor="{StaticResource DeepSage}"
+            Padding="20,48,20,24"
+            RowDefinitions="Auto,Auto"
+            RowSpacing="16">
+
+            <!-- Top bar: greeting + icons -->
+            <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+                <VerticalStackLayout Grid.Column="0" Spacing="2">
+                    <Label Text="Good morning," TextColor="#CCDDCB" FontSize="13"/>
+                    <Label Text="Maria 👋" TextColor="White" FontFamily="PoppinsBold" FontSize="20"/>
+                </VerticalStackLayout>
+                <HorizontalStackLayout Grid.Column="1" Spacing="10" VerticalOptions="Center">
+                    <Border
+                        BackgroundColor="#FFFFFF20"
+                        WidthRequest="38" HeightRequest="38"
+                        StrokeShape="RoundRectangle 19" Stroke="Transparent">
+                        <Label Text="🔔" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    </Border>
+                    <Border
+                        BackgroundColor="#FFFFFF20"
+                        WidthRequest="38" HeightRequest="38"
+                        StrokeShape="RoundRectangle 19" Stroke="Transparent">
+                        <Label Text="👤" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    </Border>
+                </HorizontalStackLayout>
+            </Grid>
+
+            <!-- Weather Card -->
+            <Border
+                Grid.Row="1"
+                BackgroundColor="#FFFFFF18"
+                StrokeShape="RoundRectangle 18"
+                Stroke="#FFFFFF20"
+                Padding="16">
+                <Grid RowDefinitions="Auto,Auto" RowSpacing="12">
+                    <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+
+                        <!-- Sun icon -->
+                        <Border
+                            Grid.Column="0"
+                            BackgroundColor="#C97B6340"
+                            WidthRequest="52" HeightRequest="52"
+                            StrokeShape="RoundRectangle 14" Stroke="Transparent">
+                            <Label Text="☀️" FontSize="28" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        </Border>
+
+                        <!-- Temp & Location -->
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                            <Label
+                                Text="{Binding Weather.Location}"
+                                TextColor="#CCDDCB" FontSize="12"/>
+                            <Label
+                                Text="{Binding Weather.Temperature, StringFormat='{0}°C'}"
+                                TextColor="White" FontFamily="PoppinsBold" FontSize="28"/>
+                        </VerticalStackLayout>
+
+                        <!-- Humidity & Wind -->
+                        <VerticalStackLayout Grid.Column="2" VerticalOptions="Center" Spacing="4">
+                            <HorizontalStackLayout Spacing="4">
+                                <Label Text="💧" FontSize="12"/>
+                                <Label
+                                    Text="{Binding Weather.HumidityLabel}"
+                                    TextColor="White" FontSize="11" FontFamily="PoppinsSemiBold"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Spacing="4">
+                                <Label Text="💨" FontSize="12"/>
+                                <Label
+                                    Text="{Binding Weather.WindSpeed, StringFormat='{0} km/h'}"
+                                    TextColor="#AACCAA" FontSize="11"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Spacing="4">
+                                <Label Text="🌡️" FontSize="12"/>
+                                <Label
+                                    Text="{Binding Weather.FeelsLike, StringFormat='Feels {0}°C'}"
+                                    TextColor="{StaticResource Terracotta}" FontSize="11" FontFamily="PoppinsSemiBold"/>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <!-- Humidity progress bar -->
+                    <Grid Grid.Row="1" RowDefinitions="Auto,Auto" RowSpacing="4">
+                        <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+                            <Label Grid.Column="0" Text="Humidity Index" TextColor="#AACCAA" FontSize="10"/>
+                            <Label
+                                Grid.Column="1"
+                                Text="{Binding Weather.FabricAdvice}"
+                                TextColor="{StaticResource Terracotta}"
+                                FontSize="10" FontFamily="PoppinsSemiBold"/>
+                        </Grid>
+                        <ProgressBar
+                            Grid.Row="1"
+                            Progress="{Binding Weather.Humidity, Converter={StaticResource DivideBy100Converter}}"
+                            ProgressColor="{StaticResource Terracotta}"
+                            BackgroundColor="#FFFFFF20"
+                            HeightRequest="6"/>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- ── Scrollable Content ──────────────────── -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20,20,20,160" Spacing="16">
+
+                <!-- Fabric Persona Card -->
+                <Border
+                    BackgroundColor="{StaticResource DeepSage}"
+                    StrokeShape="RoundRectangle 24"
+                    Stroke="Transparent"
+                    Padding="20">
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="8">
+                        <HorizontalStackLayout Grid.Row="0" Spacing="8" VerticalOptions="Center">
+                            <Border
+                                BackgroundColor="#FFFFFF22"
+                                WidthRequest="30" HeightRequest="30"
+                                StrokeShape="RoundRectangle 15" Stroke="Transparent">
+                                <Label Text="🔥" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Border>
+                            <Label Text="FABRIC PERSONA" TextColor="#AACCAA" FontSize="11"
+                                   FontFamily="PoppinsSemiBold" LetterSpacing="1.5"
+                                   VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
+                        <Label Grid.Row="1"
+                               Text="{Binding HulasLabel}"
+                               TextColor="White" FontFamily="PoppinsBold" FontSize="22"/>
+                        <Label Grid.Row="2"
+                               Text="{Binding HulasAdvice}"
+                               TextColor="#CCDACC" FontSize="13" LineHeight="1.5"/>
+                        <Label Grid.Row="3"
+                               Text="Change profile ›"
+                               TextColor="#AACCAA" FontSize="12">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoToOnboardingCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                </Border>
+
+                <!-- Recent Scans -->
+                <Frame Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="12">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Grid.Column="0" Text="Recent Scans" Style="{StaticResource H2}"/>
+                            <Label Grid.Column="1" Text="See all"
+                                   TextColor="{StaticResource SageGreen}"
+                                   FontFamily="PoppinsSemiBold" FontSize="14"
+                                   VerticalOptions="Center"/>
+                        </Grid>
+
+                        <CollectionView ItemsSource="{Binding RecentScans}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="model:ScanRecord">
+                                    <Grid
+                                        ColumnDefinitions="Auto,*,Auto"
+                                        ColumnSpacing="12"
+                                        Padding="0,10,0,10">
+                                        <!-- Grade badge -->
+                                        <Border
+                                            Grid.Column="0"
+                                            WidthRequest="44" HeightRequest="44"
+                                            StrokeShape="RoundRectangle 12"
+                                            BackgroundColor="{StaticResource SageGreen}"
+                                            Stroke="Transparent">
+                                            <Label
+                                                Text="{Binding Grade}"
+                                                TextColor="White"
+                                                FontFamily="PoppinsBold"
+                                                FontSize="13"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center"/>
+                                        </Border>
+                                        <!-- Name & time -->
+                                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                                            <Label Text="{Binding FabricName}"
+                                                   FontFamily="PoppinsSemiBold" FontSize="14"/>
+                                            <Label Text="{Binding ScannedAt, StringFormat='{0:MMM dd, yyyy}'}"
+                                                   Style="{StaticResource Body}" FontSize="12"/>
+                                        </VerticalStackLayout>
+                                        <Label Grid.Column="2" Text="›"
+                                               TextColor="{StaticResource MutedForeground}"
+                                               FontSize="18" VerticalOptions="Center"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Eco Insights Card -->
+                <Frame BackgroundColor="{StaticResource DeepSage}" Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="14">
+                        <HorizontalStackLayout Spacing="8">
+                            <Label Text="🌿" FontSize="18"/>
+                            <Label Text="Eco Insights"
+                                   TextColor="White" FontFamily="PoppinsBold" FontSize="16"
+                                   VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12" RowDefinitions="Auto,Auto,Auto" RowSpacing="12">
+                            <Label Grid.Row="0" Grid.Column="0" Text="♻️" FontSize="18"/>
+                            <Label Grid.Row="0" Grid.Column="1" Text="Basahan upcycle trending this week" TextColor="#CCDACC" FontSize="13"/>
+                            <Label Grid.Row="1" Grid.Column="0" Text="🍃" FontSize="18"/>
+                            <Label Grid.Row="1" Grid.Column="1" Text="Natural fibers reduce landfill by 40%" TextColor="#CCDACC" FontSize="13"/>
+                            <Label Grid.Row="2" Grid.Column="0" Text="📈" FontSize="18"/>
+                            <Label Grid.Row="2" Grid.Column="1" Text="Pre-loved linen value up +12% this season" TextColor="#CCDACC" FontSize="13"/>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Frame>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- ── Bottom Bar + FAB ────────────────────── -->
+        <Grid Grid.Row="2" BackgroundColor="Transparent" RowDefinitions="Auto,Auto">
+
+            <!-- FAB -->
+            <Border
+                Grid.Row="0"
+                HorizontalOptions="Center"
+                Margin="0,0,0,-28"
+                ZIndex="10">
+                <Border.Shadow>
+                    <Shadow Brush="{StaticResource DeepSage}" Offset="0,8" Opacity="0.4" Radius="20"/>
+                </Border.Shadow>
+                <Button
+                    Text="📷  Start Fabric Scan"
+                    BackgroundColor="{StaticResource DeepSage}"
+                    TextColor="{StaticResource Cream}"
+                    FontFamily="PoppinsBold"
+                    FontSize="15"
+                    CornerRadius="30"
+                    HeightRequest="58"
+                    Padding="28,0"
+                    Command="{Binding StartScanCommand}"
+                    BorderColor="{StaticResource Cream}"
+                    BorderWidth="3"/>
+            </Border>
+
+            <!-- Tab Bar -->
+            <Grid
+                Grid.Row="1"
+                BackgroundColor="White"
+                ColumnDefinitions="*,*,*"
+                Padding="0,36,0,24">
+
+                <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" Spacing="4">
+                    <Label Text="🏠" FontSize="22" HorizontalOptions="Center"/>
+                    <Label Text="Home" TextColor="{StaticResource DeepSage}"
+                           FontFamily="PoppinsSemiBold" FontSize="10" HorizontalOptions="Center"/>
+                    <Ellipse WidthRequest="5" HeightRequest="5"
+                             Fill="{StaticResource DeepSage}" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center" Spacing="4">
+                    <Label Text="👗" FontSize="22" HorizontalOptions="Center"/>
+                    <Label Text="My Closet" TextColor="#B0A99A"
+                           FontFamily="PoppinsRegular" FontSize="10" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" Spacing="4">
+                    <Label Text="🗺️" FontSize="22" HorizontalOptions="Center"/>
+                    <Label Text="Eco-Map" TextColor="#B0A99A"
+                           FontFamily="PoppinsRegular" FontSize="10" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</ContentPage>
+Views/OnboardingPage.xaml
+
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="HabiCheck.Views.OnboardingPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:HabiCheck.ViewModels"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="{StaticResource Cream}">
+
+    <ContentPage.BindingContext>
+        <vm:OnboardingViewModel/>
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout Padding="24" Spacing="0" VerticalOptions="Center">
+
+        <!-- Header -->
+        <Label Text="Fabric Persona"
+               Style="{StaticResource H1}"
+               HorizontalOptions="Center"
+               Margin="0,0,0,6"/>
+        <Label HorizontalOptions="Center" Margin="0,0,0,36">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="Ano ang iyong " TextColor="{StaticResource MutedForeground}" FontSize="16"/>
+                    <Span Text="Hulas" TextColor="{StaticResource Terracotta}" FontFamily="PoppinsSemiBold" FontSize="16"/>
+                    <Span Text=" level?" TextColor="{StaticResource MutedForeground}" FontSize="16"/>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+        <!-- Chill Lang Card -->
+        <Border
+            BackgroundColor="#3B82F6"
+            StrokeShape="RoundRectangle 24"
+            Stroke="Transparent"
+            Padding="20"
+            Margin="0,0,0,14">
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding SelectHulasCommand}" CommandParameter="chill"/>
+            </Border.GestureRecognizers>
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="16">
+                <Label Grid.Column="0" Text="❄️" FontSize="52" VerticalOptions="Center"/>
+                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="4">
+                    <Label Text="Chill Lang" TextColor="White" FontFamily="PoppinsBold" FontSize="22"/>
+                    <Label Text="Rarely sweat, even sa init" TextColor="#DDEEFF" FontSize="13"/>
+                </VerticalStackLayout>
+            </Grid>
+        </Border>
+
+        <!-- Normal Lang Card -->
+        <Border
+            BackgroundColor="{StaticResource SageGreen}"
+            StrokeShape="RoundRectangle 24"
+            Stroke="Transparent"
+            Padding="20"
+            Margin="0,0,0,14">
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding SelectHulasCommand}" CommandParameter="normal"/>
+            </Border.GestureRecognizers>
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="16">
+                <Label Grid.Column="0" Text="💧" FontSize="52" VerticalOptions="Center"/>
+                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="4">
+                    <Label Text="Normal Lang" TextColor="White" FontFamily="PoppinsBold" FontSize="22"/>
+                    <Label Text="Average sweat, depends sa activity" TextColor="#DDF0DD" FontSize="13"/>
+                </VerticalStackLayout>
+            </Grid>
+        </Border>
+
+        <!-- Super Pawisin Card -->
+        <Border
+            BackgroundColor="{StaticResource Terracotta}"
+            StrokeShape="RoundRectangle 24"
+            Stroke="Transparent"
+            Padding="20"
+            Margin="0,0,0,36">
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding SelectHulasCommand}" CommandParameter="pawisin"/>
+            </Border.GestureRecognizers>
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="16">
+                <Label Grid.Column="0" Text="🔥" FontSize="52" VerticalOptions="Center"/>
+                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="4">
+                    <Label Text="Super Pawisin" TextColor="White" FontFamily="PoppinsBold" FontSize="22"/>
+                    <Label Text="Sweat-prone, laging may dalang face towel" TextColor="#FFE8E0" FontSize="13"/>
+                </VerticalStackLayout>
+            </Grid>
+        </Border>
+
+        <!-- Continue Button -->
+        <Button
+            Text="Continue to Scanner"
+            Style="{StaticResource PrimaryButton}"
+            Command="{Binding ContinueCommand}"
+            IsEnabled="{Binding ContinueCommand.CanExecute}"/>
+
+        <Label
+            Text="This helps us give personalized fabric recommendations"
+            Style="{StaticResource Body}"
+            FontSize="12"
+            HorizontalOptions="Center"
+            Margin="0,16,0,0"/>
+
+    </VerticalStackLayout>
+</ContentPage>
+Views/ScannerPage.xaml
+
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="HabiCheck.Views.ScannerPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:HabiCheck.ViewModels"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="Black">
+
+    <ContentPage.BindingContext>
+        <vm:ScannerViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid>
+
+        <!-- Dark textured background -->
+        <BoxView Color="#1A1A1A"/>
+
+        <!-- Grid texture overlay -->
+        <Image
+            Source="scan_grid.png"
+            Opacity="0.15"
+            Aspect="AspectFill"/>
+
+        <!-- Top Bar -->
+        <Grid
+            Padding="16,52,16,0"
+            VerticalOptions="Start"
+            ColumnDefinitions="Auto,*,Auto"
+            ZIndex="10">
+            <Border
+                Grid.Column="0"
+                BackgroundColor="#60000000"
+                WidthRequest="44" HeightRequest="44"
+                StrokeShape="RoundRectangle 22" Stroke="Transparent">
+                <Label Text="✕" TextColor="White" FontSize="20"
+                       HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnCloseClicked"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </Border>
+
+            <Border
+                Grid.Column="2"
+                BackgroundColor="{Binding FlashOn, Converter={StaticResource FlashColorConverter}}"
+                WidthRequest="44" HeightRequest="44"
+                StrokeShape="RoundRectangle 22" Stroke="Transparent">
+                <Label Text="⚡" TextColor="White" FontSize="20"
+                       HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ToggleFlashCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </Border>
+        </Grid>
+
+        <!-- Macro Guide Circle (center) -->
+        <Grid HorizontalOptions="Center" VerticalOptions="Center" ZIndex="5">
+            <Ellipse
+                WidthRequest="280" HeightRequest="280"
+                Stroke="White" StrokeThickness="3"
+                Fill="Transparent"
+                Opacity="0.6"/>
+            <!-- Inner pulse ring -->
+            <Ellipse
+                WidthRequest="280" HeightRequest="280"
+                Stroke="White" StrokeThickness="1"
+                Fill="Transparent"
+                Opacity="0.25"/>
+            <!-- Corner brackets drawn with BoxViews -->
+            <BoxView Color="White" WidthRequest="3" HeightRequest="30"
+                     HorizontalOptions="Start" VerticalOptions="Start"
+                     TranslationX="0" TranslationY="0"/>
+        </Grid>
+
+        <!-- Instruction text -->
+        <VerticalStackLayout
+            HorizontalOptions="Center"
+            VerticalOptions="End"
+            Spacing="6"
+            Margin="0,0,0,160"
+            IsVisible="{Binding IsScanning, Converter={StaticResource InvertBoolConverter}}"
+            ZIndex="10">
+            <Label Text="🔍" FontSize="32" HorizontalOptions="Center"/>
+            <Label Text="Focus on the weave pattern"
+                   TextColor="White" FontFamily="PoppinsSemiBold" FontSize="17"
+                   HorizontalOptions="Center"/>
+            <Label Text="Get close to see the fabric texture"
+                   TextColor="#CCFFFFFF" FontSize="13" HorizontalOptions="Center"/>
+        </VerticalStackLayout>
+
+        <!-- Analyzing Overlay -->
+        <Grid
+            BackgroundColor="#99000000"
+            IsVisible="{Binding IsScanning}"
+            ZIndex="20">
+            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="16">
+                <ActivityIndicator
+                    IsRunning="{Binding IsScanning}"
+                    Color="White"
+                    WidthRequest="60" HeightRequest="60"/>
+                <Label Text="Analyzing fabric..."
+                       TextColor="White" FontFamily="PoppinsSemiBold" FontSize="20"
+                       HorizontalOptions="Center"/>
+                <Label Text="Checking weave pattern &amp; fiber type"
+                       TextColor="#AAFFFFFF" FontSize="13" HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+        </Grid>
+
+        <!-- Bottom Controls -->
+        <Grid
+            VerticalOptions="End"
+            Padding="40,0,40,60"
+            ColumnDefinitions="Auto,*,Auto"
+            IsVisible="{Binding IsScanning, Converter={StaticResource InvertBoolConverter}}"
+            ZIndex="10">
+
+            <!-- Gallery button -->
+            <Border
+                Grid.Column="0"
+                BackgroundColor="#44FFFFFF"
+                WidthRequest="52" HeightRequest="52"
+                StrokeShape="RoundRectangle 26" Stroke="Transparent"
+                VerticalOptions="Center">
+                <Label Text="🖼️" FontSize="24"
+                       HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding PickFromGalleryCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </Border>
+
+            <!-- Shutter button -->
+            <Border
+                Grid.Column="1"
+                BackgroundColor="White"
+                WidthRequest="80" HeightRequest="80"
+                StrokeShape="RoundRectangle 40" Stroke="Transparent"
+                HorizontalOptions="Center"
+                Shadow="{Shadow Brush=White, Offset='0,4', Opacity=0.4, Radius=12}">
+                <Ellipse
+                    WidthRequest="64" HeightRequest="64"
+                    Stroke="{StaticResource DeepSage}"
+                    StrokeThickness="4"
+                    Fill="Transparent"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                    <Ellipse.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CaptureAndScanCommand}"/>
+                    </Ellipse.GestureRecognizers>
+                </Ellipse>
+            </Border>
+
+            <BoxView Grid.Column="2" WidthRequest="52" HeightRequest="52" Color="Transparent"/>
+        </Grid>
+
+    </Grid>
+</ContentPage>
