@@ -1,0 +1,40 @@
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build folders
+/bin/
+/obj/
+
+# Visual Studio for Mac
+*.userprefs
+
+# NuGet
+/packages/
+*.nupkg
+project.lock.json
+
+# VS Code
+.vscode/
+
+# JetBrains Rider
+.idea/
+
+# Publish
+/publish/
+
+# OS generated files
+Thumbs.db
+.DS_Store
+
+# Logs
+*.log
+
+# Misc
+*.class
+*.pyc
+
+# Keep node_modules commented out unless you add front-end tooling
+# /node_modules/

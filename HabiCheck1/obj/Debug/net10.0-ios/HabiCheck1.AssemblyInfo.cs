@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HabiCheck1")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+1bb7425283f8f2a176dc47efae6c2b6aa3ef9911")]
 [assembly: System.Reflection.AssemblyProductAttribute("HabiCheck1")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HabiCheck1")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

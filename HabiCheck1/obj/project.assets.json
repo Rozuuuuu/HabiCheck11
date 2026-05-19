@@ -1,7 +1,7 @@
 {
-  "version": 4,
+  "version": 3,
   "targets": {
-    "net10.0-android": {
+    "net10.0-android36.0": {
       "CommunityToolkit.Maui/7.0.1": {
         "type": "package",
         "dependencies": {
@@ -2576,7 +2576,7 @@
         }
       }
     },
-    "net10.0-ios": {
+    "net10.0-ios26.0": {
       "CommunityToolkit.Maui/7.0.1": {
         "type": "package",
         "dependencies": {
@@ -3063,7 +3063,7 @@
           "buildTransitive/Microsoft.Maui.Resizetizer.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/10.0.5": {
+      "Microsoft.NET.ILLink.Tasks/10.0.6": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -4301,10 +4301,10 @@
         "microsoft.maui.resizetizer.nuspec"
       ]
     },
-    "Microsoft.NET.ILLink.Tasks/10.0.5": {
-      "sha512": "A+5ZuQ0f449tM+MQrhf6R9ZX7lYpjk/ODEwLYKrnF6111rtARx8fVsm4YznUnQiKnnXfaXNBqgxmil6RW3L3SA==",
+    "Microsoft.NET.ILLink.Tasks/10.0.6": {
+      "sha512": "QKuvS0LWX4fjFqeDkyM7Kqt8P3wYTiPD4nwU+9y59n0sCiG714fxDgbbN82vDnzq89AF/PiHl92TP2C4aFDUQA==",
       "type": "package",
-      "path": "microsoft.net.illink.tasks/10.0.5",
+      "path": "microsoft.net.illink.tasks/10.0.6",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -4317,7 +4317,7 @@
         "build/Microsoft.NET.ILLink.Analyzers.props",
         "build/Microsoft.NET.ILLink.Tasks.props",
         "build/Microsoft.NET.ILLink.targets",
-        "microsoft.net.illink.tasks.10.0.5.nupkg.sha512",
+        "microsoft.net.illink.tasks.10.0.6.nupkg.sha512",
         "microsoft.net.illink.tasks.nuspec",
         "tools/net/ILLink.Tasks.deps.json",
         "tools/net/ILLink.Tasks.dll",
@@ -6838,41 +6838,41 @@
     }
   },
   "projectFileDependencyGroups": {
-    "net10.0-android": [
+    "net10.0-android36.0": [
       "CommunityToolkit.Maui >= 7.0.1",
       "CommunityToolkit.Mvvm >= 8.2.2",
       "Microsoft.Maui.Controls >= 10.0.20",
       "SQLitePCLRaw.bundle_green >= 2.1.6",
       "sqlite-net-pcl >= 1.9.172"
     ],
-    "net10.0-ios": [
+    "net10.0-ios26.0": [
       "CommunityToolkit.Maui >= 7.0.1",
       "CommunityToolkit.Mvvm >= 8.2.2",
       "Microsoft.Maui.Controls >= 10.0.20",
-      "Microsoft.NET.ILLink.Tasks >= 10.0.5",
+      "Microsoft.NET.ILLink.Tasks >= 10.0.6",
       "SQLitePCLRaw.bundle_green >= 2.1.6",
       "sqlite-net-pcl >= 1.9.172"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Kurt5673\\.nuget\\packages\\": {},
+    "C:\\Users\\CCS\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Kurt5673\\Downloads\\HabiCheck1\\HabiCheck1\\HabiCheck1.csproj",
+      "projectUniqueName": "C:\\Users\\CCS\\source\\repos\\HabiCheck11\\HabiCheck1\\HabiCheck1.csproj",
       "projectName": "HabiCheck1",
-      "projectPath": "C:\\Users\\Kurt5673\\Downloads\\HabiCheck1\\HabiCheck1\\HabiCheck1.csproj",
-      "packagesPath": "C:\\Users\\Kurt5673\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Kurt5673\\Downloads\\HabiCheck1\\HabiCheck1\\obj\\",
+      "projectPath": "C:\\Users\\CCS\\source\\repos\\HabiCheck11\\HabiCheck1\\HabiCheck1.csproj",
+      "packagesPath": "C:\\Users\\CCS\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\CCS\\source\\repos\\HabiCheck11\\HabiCheck1\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Kurt5673\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\CCS\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -6886,12 +6886,12 @@
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net10.0-android": {
+        "net10.0-android36.0": {
           "framework": "net10.0-android36.0",
           "targetAlias": "net10.0-android",
           "projectReferences": {}
         },
-        "net10.0-ios": {
+        "net10.0-ios26.0": {
           "framework": "net10.0-ios26.0",
           "targetAlias": "net10.0-ios",
           "projectReferences": {}
@@ -6907,10 +6907,10 @@
         "auditLevel": "low",
         "auditMode": "all"
       },
-      "SdkAnalysisLevel": "10.0.300"
+      "SdkAnalysisLevel": "10.0.200"
     },
     "frameworks": {
-      "net10.0-android": {
+      "net10.0-android36.0": {
         "framework": "net10.0-android36.0",
         "targetAlias": "net10.0-android",
         "dependencies": {
@@ -6947,12 +6947,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[10.0.6, 10.0.6]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.Android": {
             "privateAssets": "all"
@@ -6964,7 +6958,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300-preview.0.26177.108/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.202/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -7240,7 +7234,7 @@
           "System.Xml.XPath.XDocument": "(,5.0.32767]"
         }
       },
-      "net10.0-ios": {
+      "net10.0-ios26.0": {
         "framework": "net10.0-ios26.0",
         "targetAlias": "net10.0-ios",
         "dependencies": {
@@ -7260,7 +7254,7 @@
           "Microsoft.NET.ILLink.Tasks": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[10.0.5, )",
+            "version": "[10.0.6, )",
             "autoReferenced": true
           },
           "SQLitePCLRaw.bundle_green": {
@@ -7287,10 +7281,6 @@
           {
             "name": "Microsoft.iOS.Ref.net10.0_26.0",
             "version": "[26.0.11017, 26.0.11017]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[10.0.6, 10.0.6]"
           }
         ],
         "frameworkReferences": {
@@ -7304,7 +7294,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300-preview.0.26177.108/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.202/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",
